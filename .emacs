@@ -164,6 +164,10 @@
  'json-mode
 )
 
+;;; exec-path-from-shell
+(rc/require 'exec-path-from-shell)
+(exec-path-from-shell-initialize)
+
 ;;; sh
 (add-to-list 'auto-mode-alist '("\\.sh\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.bash\\'" . sh-mode))

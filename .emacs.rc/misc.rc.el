@@ -11,6 +11,7 @@
               tab-width 4
               indent-tabs-mode nil
               compilation-scroll-output t
+              truncate-lines nil
               visible-bell (equal system-type 'windows-nt))
 
 ;;; y-or-n-p

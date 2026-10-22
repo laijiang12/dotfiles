@@ -75,6 +75,11 @@
 
 (add-hook 'markdown-mode-hook 'rc/enable-word-wrap)
 
+;;; Move Text
+(rc/require 'move-text)
+(global-set-key (kbd "M-p") 'move-text-up)
+(global-set-key (kbd "M-n") 'move-text-down)
+
 ;;; Paredit
 (rc/require 'paredit)
 
@@ -99,6 +104,9 @@
           (lambda ()
             (interactive)
             (company-mode 0)))
+
+;;; eglot
+(rc/require 'eglot)
 
 ;;; Whitespace mode(M-x customize-group RET whitespace RET whitespace-style)
 (defun rc/set-up-whitespace-handling ()

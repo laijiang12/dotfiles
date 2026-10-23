@@ -9,8 +9,10 @@
 
 ;;; Font
 ;; (set-face-attribute 'default nil :height 120)
-(add-to-list 'default-frame-alist `(font . "Iosevka-18")) ; Iosevka
-(set-fontset-font t 'han (font-spec :family "MiSans Regular" :weight 'normal))
+(add-to-list 'default-frame-alist '(font . "Iosevka-18"))
+
+(dolist (script '(han cjk-misc))
+  (set-fontset-font t script (font-spec :family "MiSans")))
 
 (menu-bar-mode 0)
 (tool-bar-mode 0)
@@ -57,6 +59,16 @@
 (global-set-key (kbd "C-c C-<")     'mc/mark-all-like-this)
 (global-set-key (kbd "C-\"")        'mc/skip-to-next-like-this)
 (global-set-key (kbd "C-:")         'mc/skip-to-previous-like-this)
+
+;;; helm
+(recentf-mode 1)
+(setq helm-ff-transformer-show-only-basename nil)
+
+(global-set-key (kbd "C-c h t")   #'helm-cmd-t)
+(global-set-key (kbd "C-c h g g") #'helm-git-grep)
+(global-set-key (kbd "C-c h f")   #'helm-find)
+(global-set-key (kbd "C-c h a")   #'helm-org-agenda-files-headings)
+(global-set-key (kbd "C-c h r")   #'helm-recentf)
 
 ;;; yasnippet
 (rc/require 'yasnippet)
@@ -105,9 +117,6 @@
             (interactive)
             (company-mode 0)))
 
-;;; eglot
-(rc/require 'eglot)
-
 ;;; Whitespace mode(M-x customize-group RET whitespace RET whitespace-style)
 (defun rc/set-up-whitespace-handling ()
   (interactive)
@@ -149,15 +158,6 @@
 ;;; http://stackoverflow.com/questions/13794433/how-to-disable-autosave-for-tramp-buffers-in-emacs
 (setq tramp-auto-save-directory "/tmp")
 
-;; right-click on the word "fixme" in a comment
-;; for next-error support:
-;; M-x fixmee-view-listing RET
-(use-package button-lock :ensure t)
-(use-package fixmee
-  :ensure t
-  :config
-  (global-fixmee-mode 1))
-
 ;;; Packages that don't require configuration
 (rc/require
  'markdown-mode
@@ -180,5 +180,21 @@
 (add-to-list 'auto-mode-alist '("\\.sh\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.bash\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
+
+(defun astyle-buffer (&optional justify)
+  (interactive)
+  (let ((saved-line-number (line-number-at-pos)))
+    (shell-command-on-region
+     (point-min)
+     (point-max)
+     "astyle --style=kr"
+     nil
+     t)
+    (goto-line saved-line-number)))
+
+(add-hook 'simpc-mode-hook
+          (lambda ()
+            (interactive)
+            (setq-local fill-paragraph-function 'astyle-buffer)))
 
 (load-file custom-file)

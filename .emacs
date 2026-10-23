@@ -181,6 +181,4 @@
 (add-to-list 'auto-mode-alist '("\\.bash\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . sh-mode))
 
-(setq font-lock-maximum-decoration t)
-
 (load-file custom-file)

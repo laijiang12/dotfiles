@@ -12,7 +12,7 @@
 (add-to-list 'default-frame-alist '(font . "Iosevka-18"))
 
 (dolist (script '(han cjk-misc))
-  (set-fontset-font t script (font-spec :family "MiSans")))
+  (set-fontset-font t script (font-spec :family "WenQuanYi Zen Hei")))
 
 (menu-bar-mode 0)
 (tool-bar-mode 0)
@@ -61,14 +61,19 @@
 (global-set-key (kbd "C-:")         'mc/skip-to-previous-like-this)
 
 ;;; helm
-(recentf-mode 1)
+(rc/require 'helm)
+(unless (package-installed-p 'helm-git-grep)
+  (package-vc-install "https://github.com/yasuyk/helm-git-grep"))
+(unless (package-installed-p 'helm-org)
+  (package-vc-install "https://github.com/emacs-helm/helm-org"))
+
 (setq helm-ff-transformer-show-only-basename nil)
 
-(global-set-key (kbd "C-c h t")   #'helm-cmd-t)
-(global-set-key (kbd "C-c h g g") #'helm-git-grep)
-(global-set-key (kbd "C-c h f")   #'helm-find)
-(global-set-key (kbd "C-c h a")   #'helm-org-agenda-files-headings)
-(global-set-key (kbd "C-c h r")   #'helm-recentf)
+(global-set-key (kbd "C-c h t") 'helm-occur)
+(global-set-key (kbd "C-c h g g") 'helm-git-grep)
+(global-set-key (kbd "C-c h f") 'helm-find)
+(global-set-key (kbd "C-c h a") 'helm-org-agenda-files-headings)
+(global-set-key (kbd "C-c h r") 'helm-recentf)
 
 ;;; yasnippet
 (rc/require 'yasnippet)

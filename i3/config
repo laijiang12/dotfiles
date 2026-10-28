@@ -60,6 +60,9 @@ bindsym --release $mod+s exec "scrot -s ~/Pictures/%Y-%m-%d_%H%M%S.png"
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# xkill
+# bindsym --release $mod+Ctrl+k exec xkill
+
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications

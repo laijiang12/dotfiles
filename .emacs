@@ -22,6 +22,8 @@
 
 (rc/require-theme 'gruber-darker)
 
+(setq warning-minimum-level :error)
+
 ;;; Relative line numbers
 (setq display-line-numbers-type 'relative
       display-line-numbers-width-start t
@@ -43,10 +45,14 @@
 (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 
 ;;; ido
+(rc/require 'smex 'ido-completing-read+)
+
+(require 'ido-completing-read+)
+
 (ido-mode 1)
 (ido-everywhere 1)
+(ido-ubiquitous-mode 1)
 
-(rc/require 'smex)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
@@ -201,5 +207,9 @@
           (lambda ()
             (interactive)
             (setq-local fill-paragraph-function 'astyle-buffer)))
+
+;;; python .venv
+(setq python-shell-virtualenv-root "~/programming/.venv/")
+(rc/require 'pyvenv)
 
 (load-file custom-file)

@@ -1,3 +1,16 @@
+noremap j h
+noremap k j
+noremap l k
+noremap ; l
+
+noremap h ;
+noremap H ,
+
+noremap <C-w>j <C-w>h
+noremap <C-w>k <C-w>j
+noremap <C-w>l <C-w>k
+noremap <C-w>; <C-w>l
+
 colorscheme GruberDarker
 set termguicolors
 

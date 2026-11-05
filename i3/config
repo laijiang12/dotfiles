@@ -70,9 +70,6 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# rofi
-# bindsym $mod+n exec --no-startup-id rofi -show drun -show-icons
-
 # xfce4-appfinder
 bindsym $mod+n exec --no-startup-id xfce4-appfinder
 for_window [class="Xfce4-appfinder"] floating enable, move position center, resize set 650 450
@@ -211,7 +208,7 @@ bar {
 }
 
 # feh picture
-exec --no-startup-id feh --bg-fill "/home/lj/Pictures/安洁莉娜/139301352_p0.jpg"
+# exec --no-startup-id feh --bg-fill "/home/lj/Pictures/2/86058059_p1-F.jpg"
 
 # Fcitx5
 exec --no-startup-id fcitx5 -d
@@ -233,4 +230,4 @@ focus_follows_mouse no
 hide_edge_borders both
 
 exec --no-startup-id picom -b
-exec_always --no-startup-id xrandr --output DP-0 --mode 2560x1600 --rate 300.00
+exec --no-startup-id xrandr --output DP-0 --mode 2560x1600 --rate 300.00

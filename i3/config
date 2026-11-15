@@ -15,11 +15,11 @@ set $mod Mod4
 # is used in the bar {} block below.
 # font pango:monospace 8
 
-font pango:Iosevka 10
-
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
+
+font pango:Iosevka 10
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -30,7 +30,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -52,33 +52,20 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-# bindsym $mod+Return exec st
-
-# scrot
-bindsym --release $mod+s exec "scrot -s"
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# xkill
-bindsym --release $mod+Ctrl+k exec xkill
-
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run -fn 'iosevka:size=11'
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+s exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -fn Iosevka:size=11'
 
 # xfce4-appfinder
 bindsym $mod+n exec --no-startup-id xfce4-appfinder
 for_window [class="Xfce4-appfinder"] floating enable, move position center, resize set 650 450
-
-# A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+j focus left
@@ -210,24 +197,24 @@ bar {
 # feh picture
 # exec --no-startup-id feh --bg-fill "/home/lj/Pictures/2/86058059_p1-F.jpg"
 
-# Fcitx5
+# fcitx5
 exec --no-startup-id fcitx5 -d
 
-# volumeicon-alsa
-exec --no-startup-id sh -c "sleep 3 && volumeicon"
+# xprop WM_CLASS
+# WPS 文档窗口（Writer/表格/演示可能还有 et、wpp、wpspdf）
+for_window [class="^wpsoffice$"] floating enable
+for_window [class="^wps$"]       floating enable
+for_window [class="^et$"]        floating enable
+for_window [class="^wpp$"]       floating enable
+for_window [class="^wpspdf$"]    floating enable
 
-# brightnessctl
-# sudo usermod -aG video $USER
 bindsym $mod+F12 exec --no-startup-id brightnessctl set +5%
 bindsym $mod+F11 exec --no-startup-id brightnessctl set 5%-
 bindsym $mod+b exec --no-startup-id boomer
 bindsym --release $mod+Shift+l exec "slock"
-bindsym $mod+Shift+p exec --no-startup-id systemctl reboot
-bindsym $mod+Shift+o exec --no-startup-id systemctl poweroff
 
 focus_follows_mouse no
 
 hide_edge_borders both
 
-exec --no-startup-id picom -b
 exec --no-startup-id xrandr --output DP-0 --mode 2560x1600 --rate 300.00

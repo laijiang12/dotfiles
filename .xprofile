@@ -3,5 +3,5 @@
 # export XMODIFIERS=@im=fcitx
 # export SDL_IM_MODULE=fcitx
 
-# sudo visudo -> Defaults    env_keep += "DISPLAY XAUTHORITY"
-xhost +local: > /dev/null 2>&1
+# export LANG=zh_CN.UTF-8
+# export LANGUAGE=zh_CN:en_US

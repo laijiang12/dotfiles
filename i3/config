@@ -201,7 +201,7 @@ bar {
 exec --no-startup-id fcitx5 -d
 
 # xprop WM_CLASS
-# WPS 文档窗口（Writer/表格/演示可能还有 et、wpp、wpspdf）
+# WPS
 for_window [class="^wpsoffice$"] floating enable
 for_window [class="^wps$"]       floating enable
 for_window [class="^et$"]        floating enable
